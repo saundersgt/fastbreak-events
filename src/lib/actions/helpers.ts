@@ -45,6 +45,15 @@ export async function actionWrapper<T>(
       error: null,
     }
   } catch (err) {
+    // Next.js redirect() and notFound() throw special errors that must
+    // propagate — catching them breaks navigation.
+    if (
+      err instanceof Error &&
+      (err.message === 'NEXT_REDIRECT' || err.message === 'NEXT_NOT_FOUND')
+    ) {
+      throw err
+    }
+
     // Pull the message out of an Error object if possible,
     // otherwise fall back to a generic string.
     const message =
