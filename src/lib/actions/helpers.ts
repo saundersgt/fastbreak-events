@@ -1,5 +1,3 @@
-import { isRedirectError } from 'next/dist/client/components/redirect-error'
-
 // ============================================================
 // ACTION RESULT TYPE
 //
@@ -47,9 +45,17 @@ export async function actionWrapper<T>(
       error: null,
     }
   } catch (err) {
-    // Next.js redirect() throws a special error that must propagate —
-    // catching it breaks navigation.
-    if (isRedirectError(err)) throw err
+    // Next.js redirect() throws a special error with a digest starting
+    // with "NEXT_REDIRECT" — it must propagate, not be caught.
+    if (
+      typeof err === 'object' &&
+      err !== null &&
+      'digest' in err &&
+      typeof (err as { digest: unknown }).digest === 'string' &&
+      (err as { digest: string }).digest.startsWith('NEXT_REDIRECT')
+    ) {
+      throw err
+    }
 
     // Pull the message out of an Error object if possible,
     // otherwise fall back to a generic string.
