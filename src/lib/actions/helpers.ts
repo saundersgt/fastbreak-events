@@ -1,3 +1,5 @@
+import { isRedirectError } from 'next/dist/client/components/redirect-error'
+
 // ============================================================
 // ACTION RESULT TYPE
 //
@@ -45,14 +47,9 @@ export async function actionWrapper<T>(
       error: null,
     }
   } catch (err) {
-    // Next.js redirect() and notFound() throw special errors that must
-    // propagate — catching them breaks navigation.
-    if (
-      err instanceof Error &&
-      (err.message === 'NEXT_REDIRECT' || err.message === 'NEXT_NOT_FOUND')
-    ) {
-      throw err
-    }
+    // Next.js redirect() throws a special error that must propagate —
+    // catching it breaks navigation.
+    if (isRedirectError(err)) throw err
 
     // Pull the message out of an Error object if possible,
     // otherwise fall back to a generic string.
