@@ -11,11 +11,11 @@ export default function HomePage() {
         The easiest way to organize and manage your sports events.
       </p>
       <div className="flex gap-4">
-        <Button asChild>
-          <Link href="/signup">Get started</Link>
+        <Button render={<Link href="/signup" />}>
+          Get started
         </Button>
-        <Button variant="outline" asChild>
-          <Link href="/login">Sign in</Link>
+        <Button variant="outline" render={<Link href="/login" />}>
+          Sign in
         </Button>
       </div>
     </main>

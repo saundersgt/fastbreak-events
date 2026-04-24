@@ -53,6 +53,11 @@ export interface EventWithVenue extends Event {
   venues: Venue | null
 }
 
+// An event with all its venues (from a select('*, venues(*)') query)
+export interface EventWithVenues extends Event {
+  venues: Venue[]
+}
+
 // A full profile with all its events (useful for dashboard)
 export interface ProfileWithEvents extends Profile {
   events: Event[]
