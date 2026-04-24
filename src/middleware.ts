@@ -11,6 +11,7 @@ const PUBLIC_ROUTES = [
   '/login',
   '/signup',
   '/callback',
+  '/confirm',
   '/',               // home/landing page
 ]
 

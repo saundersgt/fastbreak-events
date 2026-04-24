@@ -49,7 +49,7 @@ export async function signUp(
       password,
       options: {
         data: { full_name: fullName },
-        emailRedirectTo: `${getBaseUrl()}/auth/callback`,
+        emailRedirectTo: `${getBaseUrl()}/confirm`,
       },
     })
 
@@ -72,7 +72,7 @@ export async function signInWithGoogle() {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${getBaseUrl()}/auth/callback`,
+        redirectTo: `${getBaseUrl()}/callback`,
         queryParams: {
           access_type: 'offline',
           prompt: 'consent',
