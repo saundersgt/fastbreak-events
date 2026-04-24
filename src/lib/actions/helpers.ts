@@ -45,14 +45,16 @@ export async function actionWrapper<T>(
       error: null,
     }
   } catch (err) {
-    // Next.js redirect() throws a special error with a digest starting
-    // with "NEXT_REDIRECT" — it must propagate, not be caught.
+    // Next.js redirect() throws a special error that must propagate.
+    // Depending on the version it appears as either a digest property
+    // or as err.message === 'NEXT_REDIRECT'.
     if (
-      typeof err === 'object' &&
-      err !== null &&
-      'digest' in err &&
-      typeof (err as { digest: unknown }).digest === 'string' &&
-      (err as { digest: string }).digest.startsWith('NEXT_REDIRECT')
+      (typeof err === 'object' &&
+        err !== null &&
+        'digest' in err &&
+        typeof (err as { digest: unknown }).digest === 'string' &&
+        (err as { digest: string }).digest.startsWith('NEXT_REDIRECT')) ||
+      (err instanceof Error && err.message === 'NEXT_REDIRECT')
     ) {
       throw err
     }
@@ -65,7 +67,12 @@ export async function actionWrapper<T>(
         : 'An unexpected error occurred. Please try again.'
 
     // Log the full error on the server (never reaches the browser)
-    console.error('[actionWrapper]', err)
+    console.error('[actionWrapper] caught error:', {
+      message: err instanceof Error ? err.message : String(err),
+      digest: (err as { digest?: unknown }).digest,
+      type: typeof err,
+      keys: typeof err === 'object' && err !== null ? Object.keys(err) : [],
+    })
 
     return {
       success: false,
