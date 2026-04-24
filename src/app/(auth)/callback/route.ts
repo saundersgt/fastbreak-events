@@ -14,6 +14,6 @@ export async function GET(request: Request) {
     }
   }
 
-  // Something went wrong — redirect to login with an error param
-  return NextResponse.redirect(`${origin}/auth/login?error=auth_callback_error`)
+  // Something went wrong — redirect to login with an error message
+  return NextResponse.redirect(`${origin}/login?error=auth_callback_error`)
 }

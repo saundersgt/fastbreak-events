@@ -8,9 +8,9 @@ import { NextResponse, type NextRequest } from 'next/server'
 // is considered protected.
 // ============================================================
 const PUBLIC_ROUTES = [
-  '/auth/login',
-  '/auth/signup',
-  '/auth/callback',
+  '/login',
+  '/signup',
+  '/callback',
   '/',               // home/landing page
 ]
 
@@ -66,7 +66,7 @@ export async function middleware(request: NextRequest) {
   // protected route — redirect them to the login page.
   if (!user && !isPublicRoute(pathname)) {
     const loginUrl = request.nextUrl.clone()
-    loginUrl.pathname = '/auth/login'
+    loginUrl.pathname = '/login'
     // Preserve where they were trying to go so we can
     // redirect them back after a successful login.
     loginUrl.searchParams.set('next', pathname)
@@ -75,7 +75,7 @@ export async function middleware(request: NextRequest) {
 
   // If the user IS logged in and tries to visit login/signup,
   // redirect them to the dashboard instead.
-  if (user && (pathname === '/auth/login' || pathname === '/auth/signup')) {
+  if (user && (pathname === '/login' || pathname === '/signup')) {
     const dashboardUrl = request.nextUrl.clone()
     dashboardUrl.pathname = '/dashboard'
     return NextResponse.redirect(dashboardUrl)
