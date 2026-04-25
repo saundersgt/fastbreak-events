@@ -117,10 +117,10 @@ export function EventForm(props: EventFormProps) {
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6">
 
         {/* ---- Event details ---- */}
-        <Card>
+        <Card className="bg-zinc-900 border-white/10">
           <CardHeader>
-            <CardTitle>{isEdit ? 'Edit Event' : 'Create Event'}</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-white">{isEdit ? 'Edit Event' : 'Create Event'}</CardTitle>
+            <CardDescription className="text-white/40">
               {isEdit
                 ? 'Update the details for this event.'
                 : 'Fill in the details for your new sports event.'}
@@ -222,10 +222,10 @@ export function EventForm(props: EventFormProps) {
         </Card>
 
         {/* ---- Venues ---- */}
-        <Card>
+        <Card className="bg-zinc-900 border-white/10">
           <CardHeader>
-            <CardTitle>Venues</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-white">Venues</CardTitle>
+            <CardDescription className="text-white/40">
               Add one or more venues where the event will take place.
             </CardDescription>
           </CardHeader>
@@ -241,10 +241,10 @@ export function EventForm(props: EventFormProps) {
             {fields.map((field, index) => (
               <div
                 key={field.id}
-                className="flex flex-col gap-3 rounded-lg border border-slate-200 bg-slate-50 p-4"
+                className="flex flex-col gap-3 rounded-lg border border-white/10 bg-white/5 p-4"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-slate-700">
+                  <span className="text-sm font-medium text-white/60">
                     Venue {index + 1}
                   </span>
                   <Button

@@ -93,11 +93,11 @@ export default function LoginPage() {
   const isLoading = isEmailLoading || isGoogleLoading
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
-      <Card className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center bg-black px-4">
+      <Card className="w-full max-w-md border-white/10 bg-zinc-900/90">
         <CardHeader className="space-y-1 text-center">
-          <CardTitle className="text-2xl font-bold">Welcome back</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-3xl font-bold text-white">Welcome back</CardTitle>
+          <CardDescription className="text-white/50">
             Sign in to your Fastbreak Events account
           </CardDescription>
         </CardHeader>
@@ -122,10 +122,10 @@ export default function LoginPage() {
           {/* Divider */}
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t border-slate-200" />
+              <span className="w-full border-t border-white/10" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-white px-2 text-slate-400">
+              <span className="bg-zinc-900 px-2 text-white/40">
                 or continue with email
               </span>
             </div>
@@ -177,11 +177,11 @@ export default function LoginPage() {
         </CardContent>
 
         <CardFooter className="justify-center">
-          <p className="text-sm text-slate-600">
+          <p className="text-sm text-white/40">
             Don&apos;t have an account?{' '}
             <Link
               href="/signup"
-              className="font-medium text-slate-900 underline underline-offset-4 hover:text-slate-700"
+              className="font-medium text-primary underline underline-offset-4 hover:text-primary/80"
             >
               Sign up
             </Link>

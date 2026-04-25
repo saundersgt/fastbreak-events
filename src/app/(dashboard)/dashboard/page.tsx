@@ -52,24 +52,23 @@ function formatDate(iso: string) {
 function EventCard({ event }: { event: EventWithVenues }) {
   const venueCount = event.venues.length
   return (
-    <Card>
+    <Card className="bg-zinc-900 border-white/10 hover:border-primary/50 transition-colors group">
       <CardHeader>
-        <CardTitle>{event.name}</CardTitle>
-        <Badge variant="secondary" className="w-fit capitalize">
+        <CardTitle className="text-white group-hover:text-primary transition-colors">{event.name}</CardTitle>
+        <Badge className="w-fit capitalize bg-primary/20 text-primary border-primary/30 hover:bg-primary/30">
           {event.sport_type}
         </Badge>
-        {/* CardAction is auto-positioned to the top-right of the header */}
         <CardAction>
           <EventCardActions eventId={event.id} eventName={event.name} />
         </CardAction>
       </CardHeader>
-      <CardContent className="flex flex-col gap-2 text-sm text-muted-foreground">
+      <CardContent className="flex flex-col gap-2 text-sm text-white/40">
         <span className="flex items-center gap-1.5">
-          <CalendarIcon className="size-3.5 shrink-0" />
+          <CalendarIcon className="size-3.5 shrink-0 text-primary/70" />
           {formatDate(event.event_date)}
         </span>
         <span className="flex items-center gap-1.5">
-          <MapPinIcon className="size-3.5 shrink-0" />
+          <MapPinIcon className="size-3.5 shrink-0 text-primary/70" />
           {venueCount === 0
             ? 'No venues'
             : `${venueCount} venue${venueCount === 1 ? '' : 's'}`}
@@ -84,16 +83,16 @@ function EventCard({ event }: { event: EventWithVenues }) {
 function EmptyState({ hasFilters }: { hasFilters: boolean }) {
   if (hasFilters) {
     return (
-      <div className="rounded-lg border border-dashed border-slate-300 bg-white p-12 text-center">
-        <p className="text-slate-500 text-sm">
+      <div className="rounded-lg border border-dashed border-white/10 bg-zinc-900/50 p-12 text-center">
+        <p className="text-white/40 text-sm">
           No events match your search. Try adjusting your filters.
         </p>
       </div>
     )
   }
   return (
-    <div className="rounded-lg border border-dashed border-slate-300 bg-white p-12 text-center">
-      <p className="text-slate-500 text-sm">
+    <div className="rounded-lg border border-dashed border-white/10 bg-zinc-900/50 p-12 text-center">
+      <p className="text-white/40 text-sm">
         No events yet. Create your first event to get started.
       </p>
       <Button render={<Link href="/dashboard/events/new" />} className="mt-4">
@@ -125,8 +124,8 @@ export default async function DashboardPage({
       {/* Section header */}
       <div className="mb-8 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-foreground">Your Events</h2>
-          <p className="text-muted-foreground mt-1">Manage and track your sports events.</p>
+          <h2 className="text-3xl font-bold text-white">Your Events</h2>
+          <p className="text-white/40 mt-1">Manage and track your sports events.</p>
         </div>
         <Button render={<Link href="/dashboard/events/new" />}>
           Create Event
@@ -138,7 +137,7 @@ export default async function DashboardPage({
 
       {/* Error state */}
       {!result.success && (
-        <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700 mb-6">
+        <div className="rounded-lg border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-400 mb-6">
           Failed to load events: {result.error}
         </div>
       )}

@@ -85,7 +85,7 @@ export function FiltersBar({ defaultSearch, defaultSport }: FiltersBarProps) {
       <select
         defaultValue={defaultSport ?? ''}
         onChange={(e) => updateParam('sport', e.target.value)}
-        className="h-9 rounded-md border border-input bg-background px-3 py-1 text-sm shadow-xs transition-colors focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 w-44"
+        className="h-9 rounded-md border border-white/10 bg-zinc-900 text-white/80 px-3 py-1 text-sm transition-colors focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-primary/50 w-44"
       >
         <option value="">All sports</option>
         {SPORT_OPTIONS.map((sport) => (
